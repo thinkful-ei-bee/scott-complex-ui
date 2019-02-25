@@ -61,11 +61,16 @@ function handleNewItemSubmit() {
     event.preventDefault();
     console.log('`handleNewItemSubmit` ran');
     const newItemName = $('.js-shopping-list-entry').val();
-    console.log(newItemName);
     $('.js-shopping-list-entry').val('');
     addItemToShoppingList(newItemName);
     renderShoppingList();
   });
+}
+
+function toggleCheckedForListItem(itemId) {
+  console.log(`Toggling checked property for item with id ${itemId}`);
+  const item = STORE.find(item => item.id === itemId);
+  item.checked = !item.checked;
 }
 
 function getItemIdFromElement(item) {
@@ -78,9 +83,9 @@ function getItemIdFromElement(item) {
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
     console.log('`handleItemCheckClicked` ran');
-    const itemId = getItemIdFromElement
-    (event.currentTarget);
-    console.log(`itemId: ${itemId}`);
+    const itemId = getItemIdFromElement(event.currentTarget);
+    toggleCheckedForListItem(itemId);
+    renderShoppingList();
   });
 }
 
