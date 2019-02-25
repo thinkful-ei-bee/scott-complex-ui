@@ -17,15 +17,28 @@ const STORE = [
   {name: 'bread', checked: false },
 ]
 
+function generateItemElement(item, itemIndex, template) {
+  return `
+  <li data-item-id="${item.id}">
+    <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+    <div class="shopping-item-controls">
+      <button class="shopping-item-toggle js-item-toggle">
+          <span class="button-label">check</span>
+      </button>
+      <button class="shopping-item-delete js-item-delete">
+          <span class="button-label">delete</span>
+      </button>
+    </div>
+  </li>`;
+}
+
 function generateShoppingItemsString(shoppingList) {
   console.log('Generating shopping list element');
 
-  return `
-    <li>apples</li>
-    <li>oranges</li>
-    <li>milk</li>
-    <li>bread</li>
-  `;
+  const items = shoppingList.map((item, index) => 
+  generateItemElement(item, index));
+  
+  return items.join("");
 }
 
 function renderShoppingList() {
@@ -55,7 +68,7 @@ function handleItemCheckClicked() {
 function handleDeleteItemClicked() {
   // this function will be responsible for when users want to delete a shopping list
   // item
-  console.log('`handleDeleteItemClicked` ran')
+  console.log('`handleDeleteItemClicked` ran');
 }
 
 // this function will be our callback when the page loads. it's responsible for
