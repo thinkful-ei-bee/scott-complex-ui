@@ -10,6 +10,7 @@
 // indicates if it's checked off or not.
 // we're pre-adding items to the shopping list so there's
 // something to see when the page first loads.
+
 const STORE = [
   {id: cuid(), name: 'apples', checked: false},
   {id: cuid(), name: 'oranges', checked: false },
@@ -81,9 +82,7 @@ function deleteListItem(itemId) {
 
 function getItemIdFromElement(item) {
   console.log('`getItemIdFromElement` ran');
-  return $(item)
-    .closest('li')
-    .data('item-id');
+  return $(item).closest('li').data('item-id');
 }
 
 function handleItemCheckClicked() {
@@ -94,7 +93,6 @@ function handleItemCheckClicked() {
     renderShoppingList();
   });
 }
-
 
 function handleDeleteItemClicked() {
   $('.js-shopping-list').on('click', `.js-item-delete`, event => {
