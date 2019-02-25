@@ -60,7 +60,7 @@ function handleNewItemSubmit() {
   $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
     console.log('`handleNewItemSubmit` ran');
-    const newItemName = $('js.shopping-list-entry').val();
+    const newItemName = $('.js-shopping-list-entry').val();
     console.log(newItemName);
     $('.js-shopping-list-entry').val('');
     addItemToShoppingList(newItemName);
@@ -68,10 +68,19 @@ function handleNewItemSubmit() {
   });
 }
 
+function getItemIdFromElement(item) {
+  console.log('`getItemIdFromElement` ran');
+  return $(item)
+    .closest('li')
+    .data('item-id');
+}
 
 function handleItemCheckClicked() {
   $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
     console.log('`handleItemCheckClicked` ran');
+    const itemId = getItemIdFromElement
+    (event.currentTarget);
+    console.log(`itemId: ${itemId}`);
   });
 }
 
