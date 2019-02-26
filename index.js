@@ -1,5 +1,6 @@
 'use strict';
 /* global $ */
+/* global cuid */
 
 // `STORE` is responsible for storing the underlying data
 // that our app needs to keep track of in order to work.
@@ -53,7 +54,7 @@ function renderShoppingList() {
 }
 
 function addItemToShoppingList(itemName) {
-  console.log(`Addint "${itemName}" to shopping list`);
+  console.log(`Adding "${itemName}" to shopping list`);
   STORE.push({id: cuid(), name: itemName, checked: false});
 }
 
@@ -76,7 +77,7 @@ function toggleCheckedForListItem(itemId) {
 
 function deleteListItem(itemId) {
   console.log(`Deleting item with id ${itemId}`);
-  const item = STORE.find(item => item.id === itemId);
+  const item = STORE.findIndex(item => item.id === itemId);
   STORE.splice(item, 1);
 }
 
@@ -86,7 +87,7 @@ function getItemIdFromElement(item) {
 }
 
 function handleItemCheckClicked() {
-  $('.js-shopping-list').on('click', `.js-item-toggle`, event => {
+  $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     console.log('`handleItemCheckClicked` ran');
     const itemId = getItemIdFromElement(event.currentTarget);
     toggleCheckedForListItem(itemId);
@@ -95,7 +96,7 @@ function handleItemCheckClicked() {
 }
 
 function handleDeleteItemClicked() {
-  $('.js-shopping-list').on('click', `.js-item-delete`, event => {
+  $('.js-shopping-list').on('click', '.js-item-delete', event => {
     console.log('`handleDeleteItemClicked` ran');
     const itemId = getItemIdFromElement(event.currentTarget);
     deleteListItem(itemId);
